@@ -33,6 +33,15 @@ export const getTactileSwitchOptions = (currentOptions) => {
   return defaultTactileSwitchOptions;
 }
 
+export const getTactileSwitchBOMLine = (component) => { 
+  return {
+    value: "-",
+    description: "Tactile switch",
+    footprint: ((component.pitchX - 1) * 2.54) + "x" + ((component.pitchY - 1) * 2.54) + "mm ("+ component.pitchX + "x" + component.pitchY + " holes) pitch"
+  }
+}
+
+
 export const drawTactileSwitch = (component) => {
 
   // Enforce square body.

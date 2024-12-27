@@ -21,6 +21,15 @@ export const getTestPointOptions = () => {
   return defaultTestPointOptions;
 }
 
+export const getTestPointBOMLine = (component) => {
+  return {
+    value: "-",
+    description: "Test point",
+    footprint: component.diameter + "mm diameter" 
+  }
+}
+
+
 export const drawTestPoint = (component) => {
   let position;
   if(component.hole) {

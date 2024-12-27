@@ -43,6 +43,14 @@ export const getLEDOptions = () => {
   return updatedLEDOptions;
 }
 
+export const getLEDBOMLine = (component) => {
+  return {
+    value: component.colour || "-",
+    description: "Light emitting diode",
+    footprint: component.diameter + "mm diameter"
+  }
+}
+
 export const drawLED = (component) => {
   
   const LEDGroup = new Group();

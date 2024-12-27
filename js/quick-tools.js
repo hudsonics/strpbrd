@@ -2,12 +2,14 @@ import { centreWork, drawBoard, clearBoard, setBoardLocked, getBoardLocked, getS
 import { scales, getScaleIndex, setScaleIndex } from "./global-settings.js";
 import { getCurrentLayout } from "./current-layout.js"
 import { drawComponents } from "./draw-component.js";
+import { generateBOM } from "./bom.js";
 
 export const setupQuickTools = () => {
   centreViewButton();
   lockBoardPositionButton();
   scaleSelect();
   saveLayoutButton();
+  bomButton();
 }
 
 const centreViewButton = () => {
@@ -132,4 +134,42 @@ const saveLayoutButton = () => {
   dialog.appendChild(exportButton);
   dialog.appendChild(exportNote);
 
+}
+
+const bomButton = () => {
+  const dialog = document.getElementById("bom-dialog");
+
+  const generateBOMButton = document.createElement("div");
+
+  generateBOMButton.className = "menu-item";
+  generateBOMButton.innerHTML = "Generate BOM (CSV)";
+  generateBOMButton.style.margin = "1rem auto 0 auto";
+  
+  generateBOMButton.onclick = () => {
+
+    const includeWires = document.getElementById("includeWires-input").checked ? true : false;
+    const consolidateBOM = document.getElementById("consolidateBOM-input").checked ? true : false;
+    const BOM = generateBOM(includeWires, consolidateBOM);
+    
+    let csv = encodeURI("data:text/csv;charset=utf-8," + BOM.map(e => e.join(";")).join("\n"));
+    
+    const a = document.createElement("a");
+    a.href = csv
+
+    let filename = "untitled-layout";
+    if(getCurrentLayout("layoutName")) {
+      filename = getCurrentLayout("layoutName").replace(/\s+/g, '-').toLowerCase();
+    }
+
+    if(consolidateBOM) {
+      filename += "_consolidated";
+    }
+
+    filename += "_BOM.csv";
+
+    a.download = filename;
+    a.click();
+  }
+
+  dialog.appendChild(generateBOMButton);
 }

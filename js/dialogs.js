@@ -2,7 +2,7 @@ import { getCurrentLayout, setCurrentLayout, loadCurrentLayout } from "./current
 import { clearBoard, drawBoard } from "./board.js";
 import { drawComponents } from "./draw-component.js"
 
-const dialogs = ["board-setup", "load-save-layout"]
+const dialogs = ["board-setup", "load-save-layout", "bom"]
 
 const dialogFields = {
   "board-setup": {
@@ -46,6 +46,16 @@ const dialogFields = {
       updateWorkOnChange: false,
       loadsLayout: true
     }
+  },
+  "bom": {
+    includeWires: {
+      type: "boolean",
+      label: "Include wires?",
+    },
+    consolidateBOM: {
+      type: "boolean",
+      label: "Consolidate BOM?",
+    }
   }
 }
 
@@ -82,6 +92,9 @@ const createForm = (fields, dialog) => {
       input.type = "file";
       input.accept = field.accept;
       input.style.maxWidth = "155px"; 
+    } else if (field.type == "boolean") {
+      input.type = "checkbox";
+      input.value = "true";
     }
     
     input.onchange = (event) => {

@@ -38,10 +38,17 @@ export const getWireOptions = () => {
   return updatedWireOptions;
 }
 
+export const getWireBOMLine = (component) => {
+  return {
+    value: "-",
+    description: component.colour + " wire",
+    footprint: ((component.length - 1) * 2.54) + "mm (" + component.length + " holes) length"
+  }
+}
+
 export const drawWire = (wire) => {
   // Get ending hole coord by wire length.
   const wireLength = (wire.length - 1) * 2.54;
-  console.log(wireLength);
 
   const wireGroup = new Group();
 

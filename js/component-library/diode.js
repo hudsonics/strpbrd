@@ -51,6 +51,14 @@ const defaultDiodeOptions = {
   }
 }
 
+export const getDiodeBOMLine = (component) => {
+  return {
+    value: component.value || "-",
+    description: component.composition + " diode",
+    footprint: component.orientation + " " + component.package + ", " + ((component.pitch - 1) * 2.54) + "mm (" + component.pitch + " holes) pitch"
+  }
+}
+
 export const getDiodeOptions = (currentOptions) => {
   const diodeOptions = defaultDiodeOptions;
   try {

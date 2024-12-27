@@ -81,6 +81,14 @@ export const getResistorOptions = (currentOptions) => {
   return resistorOptions;
 }
 
+export const getResistorBOMLine = (component) => {
+  return {
+    value: component.value || "-",
+    description: component.powerRating + " " + component.composition.toLowerCase() + " resistor",
+    footprint: component.orientation + ", " + ((component.pitch - 1) * 2.54) + "mm (" + component.pitch + " holes) pitch"
+  }
+}
+
 export const drawResistor = (component) => {
   const powerRating = component.powerRating;
 
@@ -262,3 +270,4 @@ export const drawResistor = (component) => {
 
   return resistorGroup;
 }
+

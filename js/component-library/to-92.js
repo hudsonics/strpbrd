@@ -47,6 +47,14 @@ export const getTO92Options = (currentOptions) => {
   return updatedTO92Options;
 }
 
+export const getTO92BOMLine = (component) => {
+  return {
+    value: component.partNumber || "-",
+    description: component.componentType + " transistor",
+    footprint: "TO-92 package"
+  }
+}
+
 export const drawTO92 = (component) => {
 
   const totalLength = component.pitch * 2.54;

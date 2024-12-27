@@ -85,6 +85,23 @@ export const getCapacitorOptions = (currentOptions) => {
   return updatedCapacitorOptions;
 }
 
+export const getCapacitorBOMLine = (component) => {
+  let footprint = component.capacitorType + ", ";
+  if(component.capacitorType == "Radial") {
+    footprint += component.width + "mm diameter, "
+  } else if(component.capacitorType == "Disc/Rect") {
+    footprint += component.width + "mm wide, "
+  }
+
+  footprint += ((component.pitch - 1) * 2.54) + "mm (" + component.pitch + " holes) pitch";
+
+  return {
+    value: component.value || "-",
+    description: (component.polarised ? "Polarised" : "Non-polarised") + " capacitor",
+    footprint: footprint
+  }
+}
+
 export const drawCapacitor = (component) => {
   
   const capacitorGroup = new Group();

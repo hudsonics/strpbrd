@@ -52,6 +52,15 @@ export const getDIPOptions = (currentOptions) => {
   return DIPOptions;
 }
 
+export const getDIPBOMLine = (component) => {
+  return {
+    value: component.partNumber || "-",
+    description: "Integrated circuit",
+    footprint: component.terminals + " way dual inline package"
+  }
+}
+
+
 export const drawDIP = (component) => {
 
   const totalLength = (component.terminals / 2) * 2.54;
@@ -164,7 +173,6 @@ export const drawDIP = (component) => {
       }
     }
 
-    console.log(leg, legPositions[leg-1]);
     pinLabel.position = pinLabelPosition,
     DIPGroup.addChild(pinLabel);
   }

@@ -1,15 +1,15 @@
 import { drawTrackCut } from "./track-cut.js";
-import { drawResistor, getResistorOptions } from "./resistor.js";
-import { drawCapacitor, getCapacitorOptions } from "./capacitor.js";
-import { drawDiode, getDiodeOptions } from "./diode.js";
-import { drawDIP, getDIPOptions } from "./dip.js";
-import { drawTO92, getTO92Options } from "./to-92.js";
-import { drawWire, getWireOptions} from "./wire.js";
-import { drawTestPoint, getTestPointOptions } from "./test-point.js";
-import { drawLED, getLEDOptions } from "./led.js";
-import { drawScrewTerminal, getScrewTerminalOptions } from "./screw-terminal.js";
+import { drawResistor, getResistorOptions, getResistorBOMLine } from "./resistor.js";
+import { drawCapacitor, getCapacitorOptions, getCapacitorBOMLine } from "./capacitor.js";
+import { drawDiode, getDiodeOptions, getDiodeBOMLine } from "./diode.js";
+import { drawDIP, getDIPOptions,getDIPBOMLine } from "./dip.js";
+import { drawTO92, getTO92Options, getTO92BOMLine } from "./to-92.js";
+import { drawWire, getWireOptions, getWireBOMLine } from "./wire.js";
+import { drawTestPoint, getTestPointOptions, getTestPointBOMLine } from "./test-point.js";
+import { drawLED, getLEDOptions, getLEDBOMLine } from "./led.js";
+import { drawScrewTerminal, getScrewTerminalOptions, getScrewTerminalBOMLine } from "./screw-terminal.js";
 import { drawLabel, getLabelOptions } from "./label.js";
-import { drawTactileSwitch, getTactileSwitchOptions } from "./tactile-switch.js";
+import { drawTactileSwitch, getTactileSwitchOptions, getTactileSwitchBOMLine } from "./tactile-switch.js";
 
 // Note: setting aliases to an empty array makes the component unsearchable.
 export const componentLibrary = {
@@ -34,7 +34,8 @@ export const componentLibrary = {
     properName: "Wire",
     aliases: [],
     getTerminals: () => { return 2; },
-    getOptions: getWireOptions 
+    getOptions: getWireOptions,
+    getBOMLine: getWireBOMLine
   },
   "resistor": {
     draw: drawResistor,
@@ -42,7 +43,8 @@ export const componentLibrary = {
     properName: "Resistor",
     aliases: ["resistor"],
     getTerminals: () => { return 2; },
-    getOptions: getResistorOptions
+    getOptions: getResistorOptions,
+    getBOMLine: getResistorBOMLine
   },
   "capacitor": {
     draw: drawCapacitor,
@@ -50,7 +52,8 @@ export const componentLibrary = {
     properName: "Capacitor",
     aliases: ["capacitor"],
     getTerminals: () => { return 2; },
-    getOptions: getCapacitorOptions
+    getOptions: getCapacitorOptions,
+    getBOMLine: getCapacitorBOMLine
   },
   "diode": {
     draw: drawDiode,
@@ -58,7 +61,8 @@ export const componentLibrary = {
     properName: "Diode",
     aliases: ["diode"],
     getTerminals: () => { return 2; },
-    getOptions: getDiodeOptions
+    getOptions: getDiodeOptions,
+    getBOMLine: getDiodeBOMLine
   },
   "dip": {
     draw: drawDIP,
@@ -66,7 +70,8 @@ export const componentLibrary = {
     properName: "Dual Inline Package",
     aliases: ["dual inline package", "dip", "chip", "ic"],
     getTerminals: () => { return 8; },
-    getOptions: getDIPOptions
+    getOptions: getDIPOptions,
+    getBOMLine: getDIPBOMLine
   },
   "led": {
     draw: drawLED,
@@ -74,7 +79,8 @@ export const componentLibrary = {
     properName: "Light Emitting Diode",
     aliases: ["light emitting diode", "led"],
     getTerminals: () => { return 2; },
-    getOptions: getLEDOptions
+    getOptions: getLEDOptions,
+    getBOMLine: getLEDBOMLine
   },
   "to-92": {
     draw: drawTO92,
@@ -82,7 +88,8 @@ export const componentLibrary = {
     properName: "TO-92",
     aliases: ["tranistor", "bjt", "mosfet", "jfet", "to-92"],
     getTerminals: () => { return 3; },
-    getOptions: getTO92Options
+    getOptions: getTO92Options,
+    getBOMLine: getTO92BOMLine
   },
   "test-point": {
     draw: drawTestPoint,
@@ -90,7 +97,8 @@ export const componentLibrary = {
     properName: "Test Point",
     aliases: ["test point", "tp"],
     getTerminals: () => { return 1; },
-    getOptions: getTestPointOptions
+    getOptions: getTestPointOptions,
+    getBOMLine: getTestPointBOMLine
   },
   "screw-terminal": {
     draw: drawScrewTerminal,
@@ -98,7 +106,8 @@ export const componentLibrary = {
     properName: "Screw Terminal",
     aliases: ["screw terminal", "block", "j"],
     getTerminals: () => { return 2; },
-    getOptions: getScrewTerminalOptions
+    getOptions: getScrewTerminalOptions,
+    getBOMLine: getScrewTerminalBOMLine
   },
   "tactile-switch": {
     draw: drawTactileSwitch,
@@ -106,6 +115,7 @@ export const componentLibrary = {
     properName: "Tactile Switch",
     aliases: ["tactile switch", "push button"],
     getTerminals: () => { return 4; },
-    getOptions: getTactileSwitchOptions
+    getOptions: getTactileSwitchOptions,
+    getBOMLine: getTactileSwitchBOMLine
   }
 }

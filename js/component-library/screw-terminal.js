@@ -53,6 +53,14 @@ export const getScrewTerminalOptions = (currentOptions) => {
   return screwTerminalOptions;
 }
 
+export const getScrewTerminalBOMLine = (component) => {
+  return {
+    value: "-",
+    description: "Screw terminal block",
+    footprint: component.terminals + " way, " + ((component.pitch - 1) * 2.54) + "mm (" + component.pitch + " holes) pitch"
+  }
+}
+
 export const drawScrewTerminal = (component) => {
 
   component.width = 10.8;
