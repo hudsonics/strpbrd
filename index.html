@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>strpbrd | Stripboard Layout Maker</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="./js/paper.js"></script>
+    <script type="module" src="./js/strpbrd.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div id="layout-info"></div>
+   
+    <dialog id="board-setup-dialog">
+      <div class="dialog-header">
+        <h3 class="dialog-heading">Board Setup</h3>
+        <button id="board-setup-close-button" class="dialog-close-button">Close</button>
+      </div>
+    </dialog>
+    
+    <dialog id="load-save-layout-dialog">
+      <div class="dialog-header">
+        <h3 class="dialog-heading">Load/Save Layout</h3>
+        <button id="load-save-layout-close-button" class="dialog-close-button">Close</button>
+      </div>
+    </dialog>
+    
+    <div id="main">
+      <menu id="sidebar">
+        <div id="strpbrd-logo-container">
+          <img id="strpbrd-logo" src="./images/strpbrd-logo.png" alt="Stripboard logo">
+        </div>
+        <p id="strpbrd-tagline">Design stripboard layouts online</p>
+        <div id="sidebar-main">
+          <div class="menu-item" id="find-component-button"><p>⚡ Place Component</p></div>
+          <div class="menu-item" id="place-track-cut-button"><p>✂️  Place Track Cut</p></div>
+          <div class="menu-item" id="place-wire-button"><p>🧵 Place Wire</p></div>
+          <div class="menu-item" id="place-label-button"><p>🏷️ Place Label</p></div>
+        </div>
+        <div id="sidebar-find-component" style="display: none;">
+          <button id="back-to-main-sidebar" class="back-button">⬅ </button>
+          <input id="findComponent" type="text" placeholder="Search for a component..." />
+          <div id="results"></div>
+        </div>
+        <div id="sidebar-component" style="display: none;">
+          <button id="back-to-find-component-sidebar" class="back-button">⬅ </button>
+          <div id="component-properties"></div>
+          <div id="place-component-button" class="menu-item"></div>
+          <div id="move-component-button" class="menu-item" title="Press m to move selected component"></div>
+          <div id="duplicate-component-button" class="menu-item" title="Press Ctrl+C to duplicate selected component"></div>
+          <div id="new-component-button" class="menu-item"></div>
+          <div id="delete-component-button" class="menu-item" style="color: red;" title="Press Del to remove the selected component"></div>
+        </div>
+      </menu>
+      
+      <div id="strpbrd-wrapper"> 
+        <canvas id="strpbrd" resize></canvas>
+      </div>
+    </div> 
+    <footer>
+      <div class="footer-buttons">
+        <div class="quick-tool" id="board-setup-open-button" role="button">
+          ⚙️ Board Setup
+        </div>
+        
+        <div class="quick-tool" id="load-save-layout-open-button" role="button">
+          💾 Load/Save Layout
+        </div>
+        
+        <div class="quick-tool" id="bom-open-button" role="button">
+          🛠️ Bill of Materials
+        </div>
+
+        <div class="quick-tool" id="lock-board-position-button" role="button">
+          🔒 Lock Board Position
+        </div>
+        
+        <div class="quick-tool" id="centre-view-button" role="button">
+          🏠 Centre View
+        </div>
+        <div class="quick-tool">
+          📐 <select id="scale-select"></select>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

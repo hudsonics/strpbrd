@@ -1,0 +1,237 @@
+:root {
+  --bg-sidebar: #F4F4F9; /* Light Grayish White */
+  --bg-footer: #B0B0B0; /* Light Grayish White */
+  --bg-workspace: #FFFFFF; /* Pure White */
+
+  --text-primary: #2E2E2E; /* Dark Charcoal */
+  --text-secondary: #6D6D6D; /* Muted Gray */
+
+  --accent-1: #8C8CFF; /* Soft Periwinkle Blue */
+  --accent-2: #A1C4FF; /* Light Sky Blue */
+
+  --button-bg: #FFF; /* White */
+  --button-outline: #E5E4E2; /* Darker Gray */
+  --button-bg-hover: #FFF; /* Very Light Gray */
+
+  --highlight: #D1E8FF; /* Pale Light Blue */
+  --selection: #FFD700; /* Golden Yellow */
+ 
+  --grid-line: #C0C0C0; /* Light Silver */
+  --status-bar: #F1F1F1; /* Very Light Gray */
+}
+
+@font-face {
+  font-family: "Liberation Mono";
+  src: url("../fonts/LiberationMono-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Liberation Mono";
+  src: url("../fonts/LiberationMono-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Liberation Mono";
+  src: url("../fonts/LiberationMono-Italic.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Liberation Mono";
+  src: url("../fonts/LiberationMono-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Liberation Mono" !important;
+  font-size: 11pt;
+  overflow: clip;
+}
+
+#main {
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: 300px auto;
+  grid-template-rows: 1fr min-content;
+  grid-template-areas:
+    "sidebar content"
+    "footer footer";
+}
+
+#strpbrd-wrapper {
+  grid-area: content;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+#sidebar {
+  grid-area: sidebar;
+  margin: 0;
+  padding: 1rem; 
+  background: rgb(247,247,247);
+  background: linear-gradient(135deg, rgba(247,247,247,1) 35%, rgba(236,236,236,1) 100%);
+  overflow-y: scroll;
+  height: 100vh;
+  align-items: center;
+}
+
+.heading {
+  margin-top: 0;
+  text-align: center;
+}
+
+#strpbrd-logo-container {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+#strpbrd-logo {
+  width: 100%;
+}
+
+#strpbrd-tagline {
+  color: var(--text-secondary);
+  font-size: 9pt;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
+}
+
+#strpbrd-heading {
+  font-style: italic;
+  border-bottom: 5px solid var(--text-primary);
+  font-size: 28pt;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+#strpbrd {
+  flex-grow: 1;
+}
+
+footer {
+  grid-area: footer;
+  display: flex;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background: rgb(236,236,236);
+  background: linear-gradient(45deg, rgba(236,236,236,1) 35%, rgba(247,247,247,1) 100%);
+
+  color: var(--text-primary);
+  text-align: center;
+  border-top: 1px solid #bbb;  
+}
+
+.footer-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  flex-grow: 2;
+  margin: auto;
+}
+
+.menu-item, .quick-tool, .resultItem {
+  border: 2px solid var(--button-outline);
+  padding: 15px;
+  margin: 10px;
+  font-size: 11pt;
+  background-color: var(--button-bg);
+  border-radius: 5px;
+  text-align: center;
+  transition: all 0.2s linear;
+  user-select: none; 
+}
+
+.menu-item:hover, .quick-tool:hover, .resultItem:hover, .back-button:hover {
+  background-color: var(--button-bg-hover);
+  color: var(--text-primary);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(162, 202, 242, 0.8);
+}
+
+.resultItem {
+  /*margin: 0 !important;*/
+}
+
+#findComponent {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #999;
+}
+
+#component-properties {
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #999;
+  font-size: 11pt;
+  background-color: #EDEDED;
+  border-radius: 5px;
+  transition: all 0.2s linear;
+}
+
+#layout-info {
+  position: absolute;
+  font-size: 11pt;
+  padding: 0.5rem;
+  top: 0px; 
+  right: 0px;
+  color: #444;
+}
+
+#scale-select {
+  margin: 0;
+}
+
+.field-container, .dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.dialog-heading {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; 
+}
+
+.dialog-close-button:hover {
+  cursor: pointer;
+}
+
+dialog {
+  border: 1px solid var(--text-primary);
+  border-radius: 5px;
+  padding: 1rem;
+  min-width: 300px;
+}
+
+dialog:hover {
+  cursor: default;
+}
+
+.field-label {
+  flex-grow: 2;
+}
+
+::backdrop {
+  background: rgb(237,237,237);
+  opacity: 0.5;
+}
+
