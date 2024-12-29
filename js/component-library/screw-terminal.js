@@ -19,7 +19,7 @@ const defaultScrewTerminalOptions = {
     type: "select",
     label: "Rotation (°)",
     options: [0, 90, 180, 270],
-    defaultValue: 90
+    defaultValue: 0
   },
   refDesLabelSize: {
     type: "select",

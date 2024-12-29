@@ -53,6 +53,7 @@ html, body {
   overflow: clip;
 }
 
+
 #main {
   display: grid;
   grid-gap: 0;
@@ -97,7 +98,7 @@ html, body {
   width: 100%;
 }
 
-#strpbrd-tagline {
+#strpbrd-tagline, #sidebar-bottom {
   color: var(--text-secondary);
   font-size: 9pt;
   text-align: center;
@@ -112,6 +113,14 @@ html, body {
   font-size: 28pt;
   display: inline-block;
   margin-bottom: 1rem;
+}
+
+#sidebar-bottom {
+  margin-top: 3rem;
+}
+
+#sidebar-bottom a { 
+  color: #7bb7ec;
 }
 
 #strpbrd {
