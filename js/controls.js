@@ -1,6 +1,6 @@
 import { updateScaleSelect } from "./quick-tools.js";
 import { getScaleIndex, setScaleIndex, scales } from "./global-settings.js";
-import { clearBoard, drawBoard } from "./board.js";
+import { clearBoard, drawBoard, moveBoard } from "./board.js";
 import { getComponentGhostState, setComponentGhostState } from "./place-component.js";
 import { getSelectedComponent, setSelectedComponent, drawComponents } from "./draw-component.js";
 import { setCurrentPage } from "./sidebar.js";
@@ -15,25 +15,53 @@ export const setupControls = () => {
     // If Y movement is negative, user has scrolled up.
     const scrollUp = event.deltaY < 0;
     if(scrollUp == true) {
-      // Increase scale if possible.
-      if(getScaleIndex() < (scales.length - 1)) { 
-        setScaleIndex(getScaleIndex() + 1);
+      if(!event.shiftKey && !event.ctrlKey && !getComponentGhostState()) {
+        // Increase scale if possible.
+        event.preventDefault();
+        if(getScaleIndex() < (scales.length - 1)) { 
+          setScaleIndex(getScaleIndex() + 1);
+        }
+      } else if(event.shiftKey && !event.ctrlKey) {
+        // Move board position right
+        event.preventDefault();
+        moveBoard(10, 0);
+        console.log("move right!");
+      } else if(!event.shiftKey && event.ctrlKey) {
+        // Move board position up
+        event.preventDefault();
+        moveBoard(0, 10);
+        console.log("move up!");
       }
+
+
     } else {
-      // Decrease scale if possible.
-      if(getScaleIndex() > 0) { 
-        setScaleIndex(getScaleIndex() - 1);
+      if(!event.shiftKey && !event.ctrlKey && !getComponentGhostState()) {
+        // Decrease scale if possible.
+        event.preventDefault();
+        if(getScaleIndex() > 0) { 
+          setScaleIndex(getScaleIndex() - 1);
+        }
+      } else if(event.shiftKey && !event.ctrlKey) {
+        // Move board position left
+        event.preventDefault();
+        moveBoard(-10, 0);
+        console.log("move left!");
+      } else if(!event.shiftKey && event.ctrlKey) {
+        // Move board position down
+        event.preventDefault();
+        moveBoard(0, -10);
+        console.log("move down!");
       }
     }
 
     // Prevent redraw when component is being placed, e.g. scaling.
-    if(!getComponentGhostState()) {
+    if(!event.shiftKey && !event.ctrlKey && !getComponentGhostState()) {
       updateScaleSelect(getScaleIndex);
       clearBoard();  
       drawBoard();
       drawComponents();
     }
-  });
+  }, { passive: false });
 
   window.onkeydown = (event) => {
     switch(event.key) {

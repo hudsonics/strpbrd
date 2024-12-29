@@ -2,7 +2,7 @@ import { getCurrentLayout, setCurrentLayout, loadCurrentLayout } from "./current
 import { clearBoard, drawBoard } from "./board.js";
 import { drawComponents } from "./draw-component.js"
 
-const dialogs = ["board-setup", "load-save-layout", "bom"]
+const dialogs = ["board-setup", "load-save-layout", "bom", "help"]
 
 const dialogFields = {
   "board-setup": {
@@ -146,7 +146,9 @@ export const setupDialogs = () => {
     closeButton.onclick = () => {
       dialog.close();
     }
-    
-    createForm(dialogFields[dialogs[i]], dialog);
+
+    if(dialogFields[dialogs[i]]) {
+      createForm(dialogFields[dialogs[i]], dialog);
+    }
   }
 }

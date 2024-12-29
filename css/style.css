@@ -235,3 +235,28 @@ dialog:hover {
   opacity: 0.5;
 }
 
+#help-dialog {
+  width: 50vw;
+  height: 60vh;
+  max-width: 600px;
+  max-height: 800px;
+  overflow-y: scroll;
+}
+
+#help-dialog > ul {
+  list-style-type: none;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+#help-dialog > ul > li {
+  margin-bottom: 1rem;
+}
+
+.key-name {
+  border: 1px solid var(--text-secondary);
+  color: var(--text-primary);
+  border-radius: 5px;
+  background-color: lightgrey;
+  padding: 3px 5px 3px 5px;
+}

@@ -31,10 +31,55 @@
       </div>
     </dialog>
     
+    <dialog id="help-dialog">
+      <div class="dialog-header">
+        <h3 class="dialog-heading">Help</h3>
+        <button id="help-close-button" class="dialog-close-button">Close</button>
+      </div>
+      
+      <p>Use the left hand panel to place and modify components.</p>
+      <p>Use the "quick tool" buttons in the bottom for additional settings/features:</p>
+
+      <p style="margin-bottom: 0;"><b>⚙ Board Setup</b></p>
+      <p style="margin-top: 5px;">Update board information and dimensions.</p>
+
+      <p style="margin-bottom: 0;"><b>💾 Load/Save Layout</b></p>
+      <p style="margin-top: 5px;">Load/save .strpbrd files containing layout information, and export the current layout as an image.</p>
+      
+      <p style="margin-bottom: 0;"><b>🛠 Bill of Materials</b></p>
+      <p style="margin-top: 5px;">Generate a CSV file detailing the components included in the layout.</p>
+      
+      <p style="margin-bottom: 0;"><b>🏠 Centre View</b></p>
+      <p style="margin-top: 5px;">Forces the layout position to return to the centre of the screen.</p>
+      
+      <p style="margin-bottom: 0;"><b>📐 Scale (Zoom)</b></p>
+      <p style="margin-top: 5px;">Manually select the scale of the layout drawn to the screen.</p>
+
+      <br />
+
+      <p><b>General Controls</b></p>
+      <p>Undo: <span class="key-name">Ctrl</span> + <span class="key-name">z</span></p>
+      <p>Redo: <span class="key-name">Ctrl</span> + <span class="key-name">y</span></p>
+
+      <br />
+      
+      <p><b>Pan and Zoom</b></p>
+      <p>Zoom in/out: <span class="key-name">Scroll</span></p>
+      <p>Pan up/down: <span class="key-name">Ctrl</span> + <span class="key-name">Scroll</span></p>
+      <p>Pan left/right: <span class="key-name">Shift</span> + <span class="key-name">Scroll</span></p>
+      
+      <br />
+      
+      <p><b>Component Actions</b></p>
+      <p>Move selected component: <span class="key-name">m</span></p>
+      <p>Delete selected component: <span class="key-name">Delete</span></p>
+      <p>Duplicate selected component: <span class="key-name">Shift</span> + <span class="key-name">c</span></p>
+    </dialog>
+    
     <div id="main">
       <menu id="sidebar">
         <div id="strpbrd-logo-container">
-          <img id="strpbrd-logo" src="./images/strpbrd-logo.png" alt="Stripboard logo">
+          <img id="strpbrd-logo" src="./images/strpbrd-logo.png" title="Stripboard logo">
         </div>
         <p id="strpbrd-tagline">Design stripboard layouts online</p>
         <div id="sidebar-main">
@@ -60,7 +105,7 @@
       </menu>
       
       <div id="strpbrd-wrapper"> 
-        <canvas id="strpbrd" resize></canvas>
+        <canvas id="strpbrd" hidpi="off" data-paper-hidpi="off" resize></canvas>
       </div>
     </div> 
     <footer>
@@ -77,7 +122,7 @@
           🛠️ Bill of Materials
         </div>
 
-        <div class="quick-tool" id="lock-board-position-button" role="button">
+        <div class="quick-tool" id="lock-board-position-button" role="button" style="display: none;">
           🔒 Lock Board Position
         </div>
         
@@ -86,6 +131,10 @@
         </div>
         <div class="quick-tool">
           📐 <select id="scale-select"></select>
+        </div>
+        
+        <div class="quick-tool" id="help-open-button" role="button">
+          ℹ️ Help
         </div>
       </div>
     </footer>

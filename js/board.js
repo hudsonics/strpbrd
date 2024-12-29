@@ -32,18 +32,14 @@ export const getHoles = () => {
 }
 
 export const drawBoard = () => {
-  let oldStripboardPosition;
-  if(stripboardGroup) {
-    oldStripboardPosition = stripboardGroup.position;
-  }
-
   stripboardGroup = new Group();
 
   setHoles([]);
 
-  let workPosition = getWorkPosition();
-  stripboardGroup.setPosition(workPosition.x, workPosition.y);
-
+  const workPosition = getWorkPosition();
+  stripboardGroup.position.x = workPosition.x;
+  stripboardGroup.position.y = workPosition.y;
+  
   // Draw substrate.
   const substrateCoords = getSubstrateCoords();
 
@@ -54,25 +50,6 @@ export const drawBoard = () => {
     strokeColor: "grey",
     fillColor: "beige"
   });
-
-  substrate.onMouseEnter = () => {
-    if(!getBoardLocked()) {
-      document.body.style.cursor = "move";
-    }
-  }
-  
-  substrate.onMouseLeave = () => {
-    document.body.style.cursor = "default";
-    //setIsMoveable(false);
-  }
-
-  substrate.onMouseDown = () => {
-    setIsMoveable(true);
-  }
-  
-  substrate.onMouseUp = () => {
-    setIsMoveable(false);
-  }
 
   stripboardGroup.addChild(substrate);  
   
@@ -89,10 +66,6 @@ export const drawBoard = () => {
     });
     
     track.onDoubleClick = () => {
-      if(!getBoardLocked()) {
-        document.body.style.cursor = "move";
-      }
-
       if(!getSelectedComponent()) {
         if(track.strokeWidth == 2) {
           track.strokeColor = "grey";
@@ -104,25 +77,6 @@ export const drawBoard = () => {
       }
     }
 
-    track.onMouseEnter = () => {
-      if(!getSelectedComponent()) {
-        document.body.style.cursor = "pointer";
-      }
-    }
-    
-    track.onMouseLeave = () => {
-      if(!getSelectedComponent()) {
-        document.body.style.cursor = "default";
-      }
-    }
-    
-    track.onMouseDown = () => {
-      setIsMoveable(true);
-    }
-    
-    track.onMouseUp = () => {
-      setIsMoveable(false);
-    }
 
     stripboardGroup.addChild(track);
      
@@ -138,38 +92,17 @@ export const drawBoard = () => {
       setHoles([...getHoles(), hole]);
       stripboardGroup.addChild(hole);
     }
-  }
+  }    
+}
 
-  stripboardGroup.onMouseMove = (event) => {
-    if(getIsMoveable() == true && boardLocked == false) {
-      if(event.point.isInside(stripboardGroup.bounds)) {
-        if(event.delta.x > 0) {
-          // Moving right...
-          stripboardGroup.position.x = stripboardGroup.position.x + Math.abs(event.delta.x);
-
-        } else if(event.delta.x < 0) {
-          // Moving left...
-          stripboardGroup.position.x = stripboardGroup.position.x - Math.abs(event.delta.x);
-        }
-
-        if(event.delta.y > 0) {
-          // Moving up
-          stripboardGroup.position.y = stripboardGroup.position.y + Math.abs(event.delta.y);
-        } else if(event.delta.y) {
-          // Moving down
-          stripboardGroup.position.y = stripboardGroup.position.y - Math.abs(event.delta.y);
-        }
-
-        //stripboardGroup.position = event.point;
-        setWorkPosition(stripboardGroup.position, stripboardGroup.bounds);
-      } else {
-        setIsMoveable(false);
-      }
-    }
-  }
-
-  stripboardGroup.onMouseLeave = () => {
-    //  setIsMoveable(false);
+export const moveBoard = (deltaX, deltaY) => {
+  if(!getBoardLocked()) {
+    stripboardGroup.position.x += deltaX;
+    stripboardGroup.position.y += deltaY;
+    setWorkPosition({ 
+      x: stripboardGroup.position.x,
+      y: stripboardGroup.position.y
+    }, stripboardGroup.bounds);
   }
 }
 
