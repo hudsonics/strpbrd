@@ -25,12 +25,10 @@ export const setupControls = () => {
         // Move board position right
         event.preventDefault();
         moveBoard(10, 0);
-        console.log("move right!");
       } else if(!event.shiftKey && event.ctrlKey) {
         // Move board position up
         event.preventDefault();
         moveBoard(0, 10);
-        console.log("move up!");
       }
 
 
@@ -45,12 +43,10 @@ export const setupControls = () => {
         // Move board position left
         event.preventDefault();
         moveBoard(-10, 0);
-        console.log("move left!");
       } else if(!event.shiftKey && event.ctrlKey) {
         // Move board position down
         event.preventDefault();
         moveBoard(0, -10);
-        console.log("move down!");
       }
     }
 

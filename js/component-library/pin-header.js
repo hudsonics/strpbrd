@@ -123,7 +123,6 @@ export const drawPinHeader = (component) => {
     position = getHoleCoords(component.hole.row, component.hole.column);
     if(component.rotation == 0 || component.rotation == 180) {
       position.y = position.y + (body.size.height / 2) - (globalSettings.getHoleDiameter()) - (refDesLabel.bounds.height / 2);
-      console.log(body);
     } else {
       position.x = position.x + (body.size.height / 2) - (globalSettings.getHoleDiameter())
       position.y = position.y - (refDesLabel.bounds.height / 2)

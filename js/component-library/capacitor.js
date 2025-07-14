@@ -307,20 +307,13 @@ export const drawCapacitor = (component) => {
       } else if(component.rotation == 90) {
         position.x = position.x + Math.abs(polarityMarkingYOffset);
         position.y = position.y + polarityMarkingXOffset;
-        console.log("Ref des label pos.: " + refDesLabel.position);
-        console.log("Polarity marking X offset: " + polarityMarkingXOffset);
-        console.log("Polarity marking Y offset: " + polarityMarkingYOffset);
         refDesLabel.position = [radius + (polarityMarkingYOffset) - (refDesLabel.bounds.width), radius + Math.abs(polarityMarkingXOffset)]
       } else if (component.rotation == 180) {
         position.x = position.x - polarityMarkingXOffset;
         position.y = position.y - polarityMarkingYOffset;
         refDesLabel.position = [radius + (polarityMarkingXOffset * 2), radius + (polarityMarkingYOffset * 2)];
       }
-      
-
     }
-
-
 
     capacitorGroup.rotate(component.rotation);
 

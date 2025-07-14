@@ -60,7 +60,6 @@ export const drawBoard = () => {
 
     if(getCurrentLayout("perf") != true) {
 
-      console.log("Drawing tracks since perf is not true", getCurrentLayout("perf"), getCurrentLayout("perf") != true);
       const track = new Shape.Rectangle({
         topLeft: [rowCoords.x1, rowCoords.y1],
         bottomRight: [rowCoords.x2, rowCoords.y2],

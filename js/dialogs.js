@@ -106,7 +106,6 @@ const createForm = (fields, dialog) => {
     input.onchange = (event) => {
       if(field.updateLayoutOnChange) {
         if(field.type == "boolean") {
-          console.log(event.target.value);
           setCurrentLayout(key, event.target.checked ? true : false);
         } else {
           setCurrentLayout(key, event.target.value);

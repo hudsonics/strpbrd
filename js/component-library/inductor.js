@@ -70,8 +70,6 @@ export const drawInductor = (component) => {
   const legLength = (totalLength - bodyLength) / 2;
   const centralX = bodyWidth / 2;
 
-  console.log(totalLength, bodyLength, legLength);
-
   const legs = new Path({
     segments: mmToPxSegments([[centralX, 0], [centralX, ((legLength * 2) + bodyLength)]]),
     strokeColor: "#B87333",

@@ -2,8 +2,6 @@ import { getCurrentLayout } from "./current-layout.js";
 import { componentLibrary } from "./component-library/component-library-wrapper.js";
 
 export const generateBOM = (includeWires = false, consolidateBOM = true) => {
-  console.log(getCurrentLayout());
-
   const currentLayout = getCurrentLayout();
   const components = JSON.parse(JSON.stringify(getCurrentLayout("components")))
   const BOM = [];
