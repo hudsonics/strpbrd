@@ -35,6 +35,12 @@ const dialogFields = {
       label: "Board Height",
       updateLayoutOnChange: true,
       updateWorkOnChange: true
+    },
+    perf: {
+      type: "boolean",
+      label: "Perf board?",
+      updateLayoutOnChange: true,
+      updateWorkOnChange: true
     }
   },
   "load-save-layout": {
@@ -99,7 +105,12 @@ const createForm = (fields, dialog) => {
     
     input.onchange = (event) => {
       if(field.updateLayoutOnChange) {
-        setCurrentLayout(key, event.target.value);
+        if(field.type == "boolean") {
+          console.log(event.target.value);
+          setCurrentLayout(key, event.target.checked ? true : false);
+        } else {
+          setCurrentLayout(key, event.target.value);
+        }  
       }
       
       if(field.updateWorkOnChange) {

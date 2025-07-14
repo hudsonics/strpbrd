@@ -9,6 +9,7 @@ export const globalSettings = {
 
 // Define real life sizes of board dimensions - all sizes in mm.
 globalSettings.getHoleDiameter = () => { return mmToPx(1.02); };
+globalSettings.getPadDiameter = () => { return mmToPx(2); };
 globalSettings.getHoleSpacing = () => { return mmToPx(2.54); };
 globalSettings.getTrackWidth = () => { return mmToPx(2); };
 globalSettings.getSubstratePadding = () => { return mmToPx(1); };

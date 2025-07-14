@@ -3,6 +3,7 @@ let currentLayout = {
   authorName: "",
   boardWidth: 20,
   boardHeight: 10,
+  perf: false,
   components: {}
 }
 
@@ -63,7 +64,6 @@ export const redo = () => {
   } else {
     alert("Nothing to redo!");
   }
-
 }
 
 export const loadCurrentLayout = (loadedLayout) => {
