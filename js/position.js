@@ -12,8 +12,12 @@ export const calculateWorkCentre = () => {
   const canvasHeight = document.getElementById("strpbrd").height;
 
   // Find halfway point (centre coords).
+  console.log(canvasWidth, workWidth);
+  console.log(canvasHeight, workHeight);
   const x = Math.floor((canvasWidth / 2) - (workWidth / 2));
   const y = Math.floor((canvasHeight / 2) - (workHeight / 2));
+
+  console.log(x, y);
 
   return { centreCoords: { x, y }, bounds: { topLeft: { x, y } } };
 }

@@ -19,9 +19,10 @@ const defaultCapacitorOptions = {
     defaultValue: "Disc/Rect"
   },
   polarised: {
-    type: "boolean",
+    type: "select",
     label: "Polarised",
-    defaultValue: false
+    options: ["Polarised", "Non-polarised"],
+    defaultValue: "Non-polarised"
   },
   pitch: {
     type: "select",
@@ -97,7 +98,7 @@ export const getCapacitorBOMLine = (component) => {
 
   return {
     value: component.value || "-",
-    description: (component.polarised ? "Polarised" : "Non-polarised") + " capacitor",
+    description: component.polarised + " capacitor",
     footprint: footprint
   }
 }
@@ -145,7 +146,7 @@ export const drawCapacitor = (component) => {
     capacitorGroup.addChild(leg2);
     
     let polarityMarking;
-    if(component.polarised) {
+    if(component.polarised == "Polarised") {
       polarityMarking = new PointText({
         point: [0, 0],
         content: "+",
@@ -181,14 +182,14 @@ export const drawCapacitor = (component) => {
       position = getHoleCoords(component.hole.row, component.hole.column);
       if(component.rotation == 0 || component.rotation == 180) {
         position.y = position.y - (globalSettings.getHoleSpacing() / 2) + mmToPx(totalLength / 2);
-        if(component.polarised) {
+        if(component.polarised == "Polarised") {
           const polarityMarkingYOffset = (body.bounds.top - polarityMarking.bounds.top) / 2;
           position.y = position.y + (component.rotation == 0 ? -(polarityMarkingYOffset) : polarityMarkingYOffset);
           refDesLabel.position.y = refDesLabel.position.y + (component.rotation == 180 ? -(polarityMarkingYOffset * 2) : -(polarityMarkingYOffset / 2));
         }
       } else {
         position.x = position.x - (globalSettings.getHoleSpacing() / 2) + mmToPx(totalLength / 2);
-        const polarityMarkingXOffset = (body.bounds.top - polarityMarking.bounds.top) / 2;
+        const polarityMarkingXOffset = (polarityMarking) ? (body.bounds.top - polarityMarking.bounds.top) / 2 : 0;
         position.x = position.x + (component.rotation == 270 ? -(polarityMarkingXOffset) : polarityMarkingXOffset);
         refDesLabel.position.x = refDesLabel.position.x + (component.rotation == 90 ? -(polarityMarkingXOffset) : +(polarityMarkingXOffset));
       }

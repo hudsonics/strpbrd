@@ -7,7 +7,7 @@ const pinouts = {
   FET: ["D-G-S", "D-S-G", "S-G-D", "S-D-G", "G-D-S", "G-S-D"]
 }
 
-const defaultTO92Options = {
+const defaultTO39Options = {
   componentType: {
     type: "select",
     label: "Component Type",
@@ -45,75 +45,105 @@ const defaultTO92Options = {
   }
 }
 
-export const getTO92Options = (currentOptions) => {
-  const updatedTO92Options = JSON.parse(JSON.stringify(defaultTO92Options));
+export const getTO39Options = (currentOptions) => {
+  const updatedTO39Options = JSON.parse(JSON.stringify(defaultTO39Options));
   try {
     if(currentOptions.componentType == "BJT") {
-      updatedTO92Options.pinout.options = pinouts["BJT"]; 
-      updatedTO92Options.pinout.defaultValue = "C-B-E"; 
+      updatedTO39Options.pinout.options = pinouts["BJT"]; 
+      updatedTO39Options.pinout.defaultValue = "C-B-E"; 
     } else if(currentOptions.componentType == "FET") {
-      updatedTO92Options.pinout.options = pinouts["FET"]; 
-      updatedTO92Options.pinout.defaultValue = "D-G-S"; 
+      updatedTO39Options.pinout.options = pinouts["FET"]; 
+      updatedTO39Options.pinout.defaultValue = "D-G-S"; 
     }
   } catch(error) {}
   
-  return updatedTO92Options;
+  return updatedTO39Options;
 }
 
-export const getTO92BOMLine = (component) => {
+export const getTO39BOMLine = (component) => {
   return {
     value: component.partNumber || "-",
     description: component.componentType + " transistor",
-    footprint: "TO-92 package"
+    footprint: "TO-39 package"
   }
 }
 
-export const drawTO92 = (component) => {
+export const drawTO39 = (component) => {
 
+  const baseRadius = mmToPx(9 / 2);
+  const topRadius = mmToPx(8 / 2);
   const totalLength = component.pitch * 2.54;
   const centralX = mmToPx(component.width / 2);
   const leg1Y = (globalSettings.getHoleSpacing() / 2);
   const leg2Y = mmToPx(totalLength) - leg1Y;
+
+
+  const TO39Group = new Group();
   
-  const flat = new Path.Line({
-    from: [0, 0],
-    to: mmToPxPoint([0, 4]),
-    strokeColor: '#333',
-    strokeWidth: 0.2 * globalSettings.getCurrentScale()
+  const tabPosition = [mmToPx(7.5 + 0.4), mmToPx(9 - 7.5 - 0.4)]
+
+  const tab = new Shape.Rectangle({
+    topLeft: mmToPxPoint([0, 0]),
+    bottomRight: mmToPxPoint([0.8, 0.8]),
+    position: tabPosition,
+    radius: 1,
+    rotation: 45,
+    strokeColor: "#333",
+    strokeWidth: 0.1 * globalSettings.getCurrentScale(),
+    fillColor: "silver"
+  });
+  
+  const bodyBase = new Shape.Circle({
+    center: [baseRadius, baseRadius],
+    radius: baseRadius,
+    strokeColor: "#333",
+    strokeWidth: 0.1 * globalSettings.getCurrentScale(),
+    fillColor: "silver"
   });
 
-  const curve = new Path.Arc({
-    from: mmToPxPoint([0, 0]),
-    through: mmToPxPoint([2.5, 2]),
-    to: mmToPxPoint([0, 4]),
-    strokeColor: '#333',
+
+  const bodyTop = new Shape.Circle({
+    center: [baseRadius, baseRadius],
+    radius: topRadius,
+    strokeColor: "grey",
     strokeWidth: 0.2 * globalSettings.getCurrentScale(),
-    fillColor: "#888",
-    closed: true
+    fillColor: "silver"
   });
 
-  const body = new Group();
-  body.addChild(flat);
-  body.addChild(curve);
+  TO39Group.addChild(tab);
+  TO39Group.addChild(bodyBase);
+  TO39Group.addChild(bodyTop);
 
-  const TO92Group = new Group();
-  TO92Group.addChild(body);
-  
   const legPositions = [];
   for(let leg = 0; leg < 3; leg++) {
     const legItem = new Shape.Circle({
-      center: [0, (leg * mmToPx(2.54))],
+      center: [((leg % 2 != 0) ? (baseRadius) : (baseRadius + mmToPx(2.54))) - mmToPx(2.54), (leg * mmToPx(2.54)) + mmToPx(1.96)],
       radius: globalSettings.getHoleDiameter() * 0.51,
       fillColor: "#333",
       data: {
         leg: true
       }
     });
-    TO92Group.addChild(legItem);
+    TO39Group.addChild(legItem);
     
     legPositions.push({ x: legItem.position.x, y: legItem.position.y });
   }
 
+  const refDesLabel = new PointText({
+    point: [0, 0],
+    content: (component.refDes ? component.refDes : ""),
+    fillColor: "black",
+    fontFamily: "monospace",
+    justification: "center",
+    fontSize: component.refDesLabelSize * globalSettings.getCurrentScale() + "pt"
+  });
+
+  refDesLabel.position = [baseRadius, baseRadius];
+  if(component.rotation == 180) {
+    refDesLabel.rotation = 180;
+  }
+
+  TO39Group.addChild(refDesLabel);
 
   for(let leg = 0; leg < 3; leg++) {
 
@@ -136,13 +166,8 @@ export const drawTO92 = (component) => {
     }
      
     pinLabel.position = pinLabelPosition,
-    TO92Group.addChild(pinLabel);
+    TO39Group.addChild(pinLabel);
   }
-
-
-
-  body.position = [legPositions[1].x + mmToPx(0.4), legPositions[1].y];
-  //TO92Group.pivot = body.position;
 
   let position = { x: 50, y: 50 };
 
@@ -152,20 +177,20 @@ export const drawTO92 = (component) => {
     // AXIAL - position.y = position.y - mmToPx(totalLength / 2);
     if(component.rotation == 0) {
       position.y = position.y + mmToPx(2.54);
-      position.x = position.x - mmToPx(0.04);
+      //position.x = position.x - mmToPx(0.04);
     } else {
       position.y = position.y + mmToPx(2.54);
-      position.x = position.x + mmToPx(0.04);// + mmToPx(0.4);
+      //position.x = position.x + mmToPx(0.04);// + mmToPx(0.4);
     }
   }
 
-  TO92Group.position = position;
-  TO92Group.data = component;
-  TO92Group.rotate(component.rotation);
+  TO39Group.position = position;
+  TO39Group.data = component;
+  TO39Group.rotate(component.rotation);
 
   if(component.refDes) {
-    TO92Group.data.refDes = component.refDes;
+    TO39Group.data.refDes = component.refDes;
   }
 
-  return TO92Group;
+  return TO39Group;
 }
