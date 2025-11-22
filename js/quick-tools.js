@@ -112,9 +112,9 @@ const saveLayoutButton = () => {
     const raster = getStripboardGroup().rasterize(300);
     a.href = raster.toDataURL();
 
-    let filename = "untitled-layout.svg";
+    let filename = "untitled-layout.png";
     if(getCurrentLayout("layoutName")) {
-      filename = getCurrentLayout("layoutName").replace(/\s+/g, '-').toLowerCase() + ".svg";
+      filename = getCurrentLayout("layoutName").replace(/\s+/g, '-').toLowerCase() + ".png";
     }
     a.download = filename;
 
