@@ -151,7 +151,7 @@ export const componentLibrary = {
   },
   "potentiometer": {
     draw: drawPotentiometer,
-    refDes: "R",
+    refDes: "POT",
     properName: "Potentiometer",
     aliases: ["potentiometer", "variable resistor", "trimmer"],
     getTerminals: () => { return 2; },
