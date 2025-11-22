@@ -4,7 +4,7 @@ import { componentLibrary } from "./component-library/component-library-wrapper.
 export const generateBOM = (includeWires = false, consolidateBOM = true) => {
   const currentLayout = getCurrentLayout();
   const components = JSON.parse(JSON.stringify(getCurrentLayout("components")))
-  const BOM = [];
+  const BOM = ["sep=;"];
 
   if(currentLayout.layoutName) {
     BOM.push(["Layout Name", currentLayout.layoutName]);
